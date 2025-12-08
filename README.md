@@ -1,16 +1,98 @@
-# React + Vite
+🌐 Ankit Kumar – Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive, and animated portfolio website showcasing my work as a Frontend Developer and MERN Stack Developer.
+Built using React, Vite, Tailwind CSS, and Framer Motion, and deployed on Vercel.
 
-Currently, two official plugins are available:
+🚀 Live Portfolio
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 https://ankitkumar.fun
 
-## React Compiler
+🔗 https://www.ankitkumar.fun
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🧑‍💻 About This Project
 
-## Expanding the ESLint configuration
+This portfolio highlights:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+My professional experience
+
+Real-world projects I have built
+
+Skills, tools, and technologies
+
+Contact information
+
+A clean, modern UX focused on animations, gradients, and performance
+
+Everything is built from scratch and optimized for speed, SEO, and responsiveness.
+
+🎨 Tech Stack
+Frontend
+
+⚛️ React + Vite
+
+🎨 Tailwind CSS
+
+✨ Framer Motion
+
+📦 Lucide Icons
+
+Other Tools
+
+☁️ Vercel (Hosting)
+
+🧪 ESLint
+
+🛠️ Git & GitHub
+
+🧩 Featured Projects
+⌚ Prime Watch – E-commerce Platform
+
+A MERN-based e-commerce app with Cloudinary, WhatsApp ordering, admin dashboard, and lazy-loaded routes.
+
+📦 IMS – Inventory Management System
+
+Real-time stock & sales tracking with role-based access, CRUD, and validation.
+
+🌍 Maa Foundation – NGO Website
+
+Donation portal with backend handling donor data securely.
+
+🛍️ AS Mall – E-commerce UI/UX
+
+A clean and modern UI for shopping experience with auto-managed cart features.
+
+📬 Contact Me
+📧 Email: ankitkumar1878@gmail.com
+🌍 Website: https://ankitkumar.fun
+🐙 GitHub: https://github.com/ANKITKUMAR1809
+🔗 LinkedIn: https://www.linkedin.com/in/ankitkumar02
+🐦 Twitter: https://x.com/AKtheProgrammer
+▶️ YouTube: https://www.youtube.com/@XCodeSyt
+📍 Patna, Bihar, India
+
+🛠️ Run Locally
+# Clone this project
+git clone https://github.com/ANKITKUMAR1809/<your-repo-name>.git
+
+# Go to folder
+cd <your-repo-name>
+
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+🚀 Build for Production
+npm run build
+
+
+Deploy using Vercel:
+
+vercel deploy
+
+❤️ Support
+
+⭐ Star this repository
+👨‍💻 Follow me on GitHub
+🔁 Share if you like the design
