@@ -1,502 +1,185 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, ArrowRight, ArrowLeft } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, ArrowLeft, Terminal, Layout, Database, Box } from "lucide-react";
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentProject, setCurrentProject] = useState(0);
-  const [filteredProjects, setFilteredProjects] = useState([]);
 
   const projectsData = [
     {
       id: 1,
-      title: "Prime Watch – E-commerce Platform",
-      description:
-        "Premium watch store with WhatsApp ordering, admin dashboard, and product catalog.",
-      longDescription:
-        "A complete e-commerce system for premium watches featuring integrated product catalog, WhatsApp-based ordering, and a powerful admin dashboard to manage products (add/edit/delete). Includes server-side filtering, lazy-loaded routes, and optimized navigation for scalable performance.",
+      title: "PRIME_WATCH",
+      type: "E_COMM_STATION",
+      description: "Premium watch store with WhatsApp ordering, admin dashboard, and product catalog.",
+      longDescription: "A complete e-commerce system for premium watches featuring integrated product catalog, WhatsApp-based ordering, and a powerful admin dashboard. Optimized for scalable performance and high-load traffic.",
       image: "⌚",
-      technologies: [
-        "MERN",
-        "Cloudinary",
-        "React Router",
-        "Framer Motion",
-        "Express",
-        "MongoDB",
-      ],
+      technologies: ["MERN", "Cloudinary", "Express", "MongoDB"],
       category: "fullstack",
-      liveUrl: "#",
+      liveUrl: "primewatch.in",
       githubUrl: "#",
-      featured: true,
+      featured: true
     },
-
     {
       id: 2,
-      title: "IMS – Inventory Management System",
-      description:
-        "Full-stock and sales tracking system with real-time validation and role-based access.",
-      longDescription:
-        "A full-stack inventory management system featuring role-based admin access, CRUD operations, product tracking, sales logging, and real-time low-stock alerts. Includes optimized database structure and real-time validations with secure dashboards.",
+      title: "IMS_MODULE",
+      type: "INVENTORY_SYNC",
+      description: "Full-stock and sales tracking system with real-time validation and role-based access.",
+      longDescription: "A full-stack inventory management system featuring role-based admin access, CRUD operations, product tracking, and real-time low-stock alerts. Built for industrial efficiency.",
       image: "📦",
-      technologies: ["MERN", "GitHub", "Express", "MongoDB", "JWT"],
+      technologies: ["MERN", "JWT", "Express", "MongoDB"],
       category: "fullstack",
-      liveUrl: "#",
+      liveUrl: "ims.ankitkumar.fun",
       githubUrl: "#",
-      featured: true,
+      featured: true
     },
-
     {
       id: 3,
-      title: "Maa Foundation – NGO Website",
-      description:
-        "Donation platform supporting women's initiatives with a simple lightweight backend.",
-      longDescription:
-        "A fast and modern NGO donation platform built using the MERN stack. Collects donor data securely without login, includes optimized forms, lightweight backend, and responsive design to support women's empowerment initiatives.",
-      image: "🌍",
-      technologies: ["MERN", "React", "Node.js", "MongoDB"],
-      category: "fullstack",
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false,
-    },
-
-    {
-      id: 4,
-      title: "AS Mall – E-commerce UI/UX",
-      description:
-        "Clean and modern UI for an e-commerce store with cart management.",
-      longDescription:
-        "A beautifully designed e-commerce UI with auto-remove cart items when quantity becomes zero, improved user experience flows, product listing, and responsive layouts. Built with React and FakeStore API for structured data rendering.",
-      image: "🛍️",
-      technologies: ["React", "FakeStore API", "Tailwind CSS"],
+      title: "KIEC_CORE",
+      type: "FRONT_VISUALIZER",
+      description: "A modern, fast, and fully responsive frontend website built with clean UI.",
+      longDescription: "KIEC is a high-performance frontend visualizer designed with optimized rendering, clean layout, and fluid user interactions. Follows strict architectural standards.",
+      image: "🌐",
+      technologies: ["React", "Tailwind", "JS"],
       category: "frontend",
-      liveUrl: "#",
+      liveUrl: "https://kiec.ankitkumar.fun",
       githubUrl: "#",
-      featured: false,
-    },
+      featured: false
+    }
   ];
 
-  const filters = [
-    { id: "all", name: "All Projects", count: projectsData.length },
-    {
-      id: "frontend",
-      name: "Frontend",
-      count: projectsData.filter((p) => p.category === "frontend").length,
-    },
-    {
-      id: "backend",
-      name: "Backend",
-      count: projectsData.filter((p) => p.category === "backend").length,
-    },
-    {
-      id: "fullstack",
-      name: "Full Stack",
-      count: projectsData.filter((p) => p.category === "fullstack").length,
-    },
-  ];
-  // Update filtered projects when activeFilter changes
-  useEffect(() => {
-    const newFilteredProjects =
-      activeFilter === "all"
-        ? projectsData
-        : projectsData.filter((project) => project.category === activeFilter);
+  const filteredProjects = activeFilter === "all" 
+    ? projectsData 
+    : projectsData.filter(p => p.category === activeFilter);
 
-    setFilteredProjects(newFilteredProjects);
-    setCurrentProject(0); // Reset to first project when filter changes
-  }, [activeFilter]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-      },
-    },
-  };
-
-  const nextProject = () => {
-    setCurrentProject((prev) =>
-      prev === filteredProjects.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const prevProject = () => {
-    setCurrentProject((prev) =>
-      prev === 0 ? filteredProjects.length - 1 : prev - 1
-    );
-  };
-
-  const handleFilterChange = (filterId) => {
-    setActiveFilter(filterId);
-  };
+  const nextProject = () => setCurrentProject((prev) => (prev + 1) % filteredProjects.length);
+  const prevProject = () => setCurrentProject((prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length);
 
   return (
-    <section
-      id="projects"
-      className="min-h-screen bg-gradient-to-br from-white via-purple-50/20 to-pink-50/10 w-full flex items-center justify-center py-20 px-4 md:px-8"
-    >
-      <div className="max-w-7xl w-full">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16 md:mb-20"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 md:mb-6">
-            My Projects
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Showcasing my journey through code - from innovative ideas to fully
-            functional applications
-          </p>
-        </motion.div>
+    <section id="projects" className="py-32 bg-[#0B0B0B] relative overflow-hidden border-b-2 border-[#1A1A1A]">
+      {/* Background Decorative Grid */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:100px_100px]" />
+      </div>
 
-        {/* Filters */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          {filters.map((filter) => (
+      <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 sm:mb-24 border-l-4 border-[#FF5F1F] pl-6 sm:pl-8">
+          <div>
+            <div className="font-mono text-[10px] text-[#FF5F1F] tracking-[0.3em] mb-3 sm:mb-4 uppercase">[ PROJECT_RESOURCES ]</div>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter uppercase text-white leading-none">
+              PROJ_DEP
+            </h2>
+          </div>
+          <p className="max-w-md text-[#888888] font-mono text-xs sm:text-sm uppercase tracking-tight">
+            Industrial deployment logs of scalable digital architecture and high-performance modules.
+          </p>
+        </div>
+
+        {/* Filter Navigation */}
+        <div className="flex flex-wrap gap-2 sm:gap-4 mb-12 sm:mb-16">
+          {["all", "frontend", "fullstack"].map((filter) => (
             <button
-              key={filter.id}
-              onClick={() => handleFilterChange(filter.id)}
-              className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2 group ${
-                activeFilter === filter.id
-                  ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg transform scale-105"
-                  : "bg-white/80 text-gray-700 hover:bg-white hover:shadow-lg hover:scale-105 border border-gray-100"
+              key={filter}
+              onClick={() => { setActiveFilter(filter); setCurrentProject(0); }}
+              className={`flex-1 sm:flex-none px-4 sm:px-8 py-3 sm:py-4 border-2 font-mono text-[10px] sm:text-xs tracking-widest uppercase transition-all ${
+                activeFilter === filter 
+                  ? "border-[#FF5F1F] bg-[#FF5F1F] text-black font-black" 
+                  : "border-[#1A1A1A] text-[#555] hover:text-white hover:border-[#333]"
               }`}
             >
-              <span>{filter.name}</span>
-              <span
-                className={`px-2 py-1 rounded-full text-xs ${
-                  activeFilter === filter.id
-                    ? "bg-white/20 text-white"
-                    : "bg-gray-100 text-gray-600"
-                }`}
-              >
-                {filter.count}
-              </span>
+              {filter.toUpperCase()}
             </button>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Featured Project Carousel */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          key={`carousel-${activeFilter}`} // Add key to force re-render
-        >
-          <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-6 md:p-8 shadow-2xl border border-white/30">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-purple-600 bg-clip-text text-transparent">
-                {activeFilter === "all"
-                  ? "Featured Project"
-                  : `${
-                      activeFilter.charAt(0).toUpperCase() +
-                      activeFilter.slice(1)
-                    } Projects`}
-              </h2>
-              {filteredProjects.length > 0 && (
-                <div className="flex gap-2">
-                  <button
-                    onClick={prevProject}
-                    className="p-3 rounded-2xl bg-white border border-gray-200 hover:bg-purple-50 hover:border-purple-200 transition-all duration-300 group"
-                  >
-                    <ArrowLeft
-                      size={20}
-                      className="text-gray-600 group-hover:text-purple-600"
-                    />
-                  </button>
-                  <button
-                    onClick={nextProject}
-                    className="p-3 rounded-2xl bg-white border border-gray-200 hover:bg-purple-50 hover:border-purple-200 transition-all duration-300 group"
-                  >
-                    <ArrowRight
-                      size={20}
-                      className="text-gray-600 group-hover:text-purple-600"
-                    />
-                  </button>
+        {/* Hero Project Carousel */}
+        <div className="relative mb-24 sm:mb-32 group">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={filteredProjects[currentProject]?.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="flex flex-col lg:grid lg:grid-cols-[1.2fr_0.8fr] border-4 border-[#1A1A1A] bg-[#0D0D0D] overflow-hidden hover:border-[#FF5F1F] transition-colors"
+            >
+              {/* Image / Icon Visualization */}
+              <div className="relative h-[250px] sm:h-[400px] lg:h-[600px] bg-[#0B0B0B] flex items-center justify-center overflow-hidden border-b-4 lg:border-b-0 lg:border-r-4 border-[#1A1A1A] group-hover:border-[#FF5F1F] transition-colors">
+                <div className="text-[100px] sm:text-[150px] md:text-[250px] opacity-20 filter grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                  {filteredProjects[currentProject]?.image}
                 </div>
-              )}
-            </div>
+                {/* HUD Elements */}
+                <div className="absolute top-4 left-4 sm:top-8 sm:left-8 font-mono text-[8px] sm:text-[10px] text-[#FF5F1F] tracking-widest uppercase bg-black/80 px-2 sm:px-4 py-1 sm:py-2">
+                  REF_ID: PROJ_00{filteredProjects[currentProject]?.id}
+                </div>
+                <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 font-mono text-[8px] sm:text-[10px] text-[#FF5F1F] tracking-widest uppercase bg-black/80 px-2 sm:px-4 py-1 sm:py-2 border border-[#FF5F1F]/20">
+                  STATUS: DEPLOYED_STABLE
+                </div>
+              </div>
 
-            {filteredProjects.length > 0 ? (
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${activeFilter}-${currentProject}`}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.5 }}
-                  className="grid lg:grid-cols-2 gap-8 items-center"
-                >
-                  {/* Project Image/Icon */}
-                  <div className="flex justify-center">
-                    <div className="relative">
-                      <div className="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl flex items-center justify-center text-6xl md:text-8xl shadow-2xl border border-white/50">
-                        {filteredProjects[currentProject]?.image}
-                      </div>
-                      {filteredProjects[currentProject]?.featured && (
-                        <div className="absolute -top-3 -right-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-2xl text-sm font-semibold shadow-lg">
-                          Featured
-                        </div>
-                      )}
-                    </div>
+              {/* Project Metadata */}
+              <div className="p-6 sm:p-10 md:p-12 space-y-8 sm:space-y-12">
+                <div className="space-y-2 sm:space-y-4">
+                  <div className="text-[#FF5F1F] font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase">
+                    // {filteredProjects[currentProject]?.type}
                   </div>
+                  <h3 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none">
+                    {filteredProjects[currentProject]?.title}
+                  </h3>
+                </div>
 
-                  {/* Project Details */}
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-800 to-purple-600 bg-clip-text text-transparent mb-2">
-                        {filteredProjects[currentProject]?.title}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        {filteredProjects[currentProject]?.longDescription}
-                      </p>
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2">
-                      {filteredProjects[currentProject]?.technologies.map(
-                        (tech, index) => (
-                          <span
-                            key={index}
-                            className="px-4 py-2 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-2xl text-sm font-medium border border-purple-100 shadow-sm"
-                          >
-                            {tech}
-                          </span>
-                        )
-                      )}
-                    </div>
-
-                    {/* Project Links */}
-                    <div className="flex gap-4 pt-4">
-                      <a
-                        href={filteredProjects[currentProject]?.liveUrl}
-                        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 group"
-                      >
-                        <ExternalLink size={18} />
-                        Live Demo
-                      </a>
-                      <a
-                        href={filteredProjects[currentProject]?.githubUrl}
-                        className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 text-gray-700 rounded-2xl font-semibold hover:bg-gray-50 hover:shadow-lg transform hover:scale-105 transition-all duration-300 group"
-                      >
-                        <Github size={18} />
-                        Source Code
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            ) : (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">📭</div>
-                <h3 className="text-2xl font-bold text-gray-600 mb-2">
-                  No Projects Found
-                </h3>
-                <p className="text-gray-500">
-                  There are no projects in this category yet.
+                <p className="text-[#E5E5E5] text-base sm:text-xl font-light leading-relaxed opacity-70 border-l-2 sm:border-l-4 border-[#FF5F1F] pl-4 sm:pl-8">
+                  {filteredProjects[currentProject]?.longDescription}
                 </p>
-              </div>
-            )}
 
-            {/* Carousel Indicators */}
-            {filteredProjects.length > 0 && (
-              <div className="flex justify-center gap-2 mt-8">
-                {filteredProjects.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentProject(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentProject
-                        ? "bg-gradient-to-r from-purple-600 to-pink-600 scale-125"
-                        : "bg-gray-300 hover:bg-gray-400"
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </motion.div>
-
-        {/* All Projects Grid */}
-        <motion.div
-          className="mb-12"
-          initial="hidden"
-          whileInView="visible"
-          variants={containerVariants}
-          viewport={{ once: true }}
-          key={`grid-${activeFilter}`} // Add key to force re-render
-        >
-          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-800 to-purple-600 bg-clip-text text-transparent mb-8 text-center">
-            {activeFilter === "all"
-              ? "All Projects"
-              : `${
-                  activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)
-                } Projects`}
-          </h2>
-
-          {filteredProjects.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  variants={itemVariants}
-                  className="bg-white/80 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300 group"
-                  whileHover={{
-                    scale: 1.02,
-                    y: -5,
-                  }}
-                >
-                  {/* Project Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center text-2xl shadow-lg border border-white/50">
-                      {project.image}
-                    </div>
-                    {project.featured && (
-                      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                        Featured
-                      </div>
-                    )}
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="font-mono text-[10px] text-[#555] tracking-widest uppercase">MODULE_STACK</div>
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
+                    {filteredProjects[currentProject]?.technologies.map(tech => (
+                      <span key={tech} className="px-2 sm:px-4 py-1 sm:py-2 border-2 border-[#1A1A1A] font-mono text-[10px] sm:text-xs text-[#888888] uppercase">
+                        {tech}
+                      </span>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Project Info */}
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-pink-600 transition-all duration-300">
-                      {project.title}
-                    </h3>
+                <div className="flex flex-col sm:flex-row gap-4 pt-4 sm:pt-8">
+                  <a href={filteredProjects[currentProject]?.liveUrl} className="flex-1 p-4 sm:p-6 bg-[#FF5F1F] text-black font-black uppercase tracking-[0.2em] text-xs sm:text-sm text-center hover:scale-105 transition-transform">
+                    INITIATE_LIVE
+                  </a>
+                  <a href={filteredProjects[currentProject]?.githubUrl} className="p-4 sm:p-6 border-4 border-[#1A1A1A] hover:border-[#FF5F1F] transition-colors text-white flex justify-center items-center">
+                    <Github size={24} />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-1">
-                      {project.technologies
-                        .slice(0, 3)
-                        .map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-2 py-1 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-lg text-xs font-medium border border-purple-100"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      {project.technologies.length > 3 && (
-                        <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-lg text-xs font-medium">
-                          +{project.technologies.length - 3}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Project Links */}
-                    <div className="flex gap-3 pt-2">
-                      <a
-                        href={project.liveUrl}
-                        className="flex-1 flex items-center justify-center gap-2 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl text-sm font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 group"
-                      >
-                        <ExternalLink size={14} />
-                        Demo
-                      </a>
-                      <a
-                        href={project.githubUrl}
-                        className="flex-1 flex items-center justify-center gap-2 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl text-sm font-semibold hover:bg-gray-50 hover:shadow-lg transform hover:scale-105 transition-all duration-300 group"
-                      >
-                        <Github size={14} />
-                        Code
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 bg-white/50 rounded-3xl border border-white/30">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-600 mb-2">
-                No Projects Available
-              </h3>
-              <p className="text-gray-500">
-                Check back soon for new projects in this category!
-              </p>
-            </div>
-          )}
-        </motion.div>
-
-        {/* Statistics */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/30 shadow-lg">
-            <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-              {projectsData.length}+
-            </div>
-            <div className="text-gray-600 font-medium">Projects Completed</div>
+          {/* Carousel Controls */}
+          <div className="absolute -bottom-6 sm:-bottom-8 right-0 flex gap-2 sm:gap-4">
+            <button onClick={prevProject} className="p-4 sm:p-6 bg-[#0B0B0B] border-2 border-[#1A1A1A] hover:border-[#FF5F1F] text-white transition-all">
+              <ArrowLeft size={20} className="sm:w-6 sm:h-6" />
+            </button>
+            <button onClick={nextProject} className="p-4 sm:p-6 bg-[#0B0B0B] border-2 border-[#1A1A1A] hover:border-[#FF5F1F] text-white transition-all">
+              <ArrowRight size={20} className="sm:w-6 sm:h-6" />
+            </button>
           </div>
+        </div>
 
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/30 shadow-lg">
-            <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-              {projectsData.filter((p) => p.featured).length}
+        {/* Project Statistics Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+          {[
+            { label: "MODULES_DEPLOYED", value: "12+" },
+            { label: "SYSTEM_UPTIME", value: "99.9%" },
+            { label: "CORE_TECHS", value: "08" },
+            { label: "CLIENT_SUCCESS", value: "100%" }
+          ].map((stat, i) => (
+            <div key={i} className="p-4 sm:p-8 border-2 border-[#1A1A1A] bg-[#0D0D0D] hover:border-[#FF5F1F]/30 transition-colors text-center sm:text-left">
+              <div className="font-mono text-[8px] sm:text-[10px] text-[#555] tracking-widest uppercase mb-2 sm:mb-4">{stat.label}</div>
+              <div className="text-2xl sm:text-4xl font-black text-white">{stat.value}</div>
             </div>
-            <div className="text-gray-600 font-medium">Featured Projects</div>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/30 shadow-lg">
-            <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-              {
-                Array.from(new Set(projectsData.flatMap((p) => p.technologies)))
-                  .length
-              }
-              +
-            </div>
-            <div className="text-gray-600 font-medium">Technologies</div>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/30 shadow-lg">
-            <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-              100%
-            </div>
-            <div className="text-gray-600 font-medium">Client Satisfaction</div>
-          </div>
-        </motion.div>
-
-        {/* Background Decorations */}
-        <div className="absolute top-40 left-10 w-32 h-32 bg-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 right-10 w-40 h-40 bg-pink-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-200/15 rounded-full blur-2xl"></div>
+          ))}
+        </div>
       </div>
     </section>
   );

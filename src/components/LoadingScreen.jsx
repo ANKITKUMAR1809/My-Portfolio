@@ -1,193 +1,136 @@
-// src/components/LoadingScreen.jsx
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const LoadingScreen = () => {
+  const [progress, setProgress] = useState(0);
+  const [status, setStatus] = useState("INITIALIZING_CORE_SYSTEMS...");
+
+  const statusMessages = [
+    "BOOTING_KERNEL_v1.0.4...",
+    "ESTABLISHING_NEURAL_LINK...",
+    "LOADING_VISUAL_INTERFACE...",
+    "DECRYPTING_PORTFOLIO_DATA...",
+    "SYNCING_PROJECT_MODULES...",
+    "SYSTEM_STABLE. READY."
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + Math.floor(Math.random() * 5) + 1;
+      });
+    }, 100);
+
+    const statusInterval = setInterval(() => {
+      setStatus(statusMessages[Math.floor(Math.random() * (statusMessages.length - 1))]);
+    }, 600);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(statusInterval);
+    };
+  }, []);
+
   return (
     <motion.div
-      className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-950 dark:to-indigo-900 px-4 sm:px-6 lg:px-8"
+      className="fixed inset-0 z-[100] bg-[#0B0B0B] flex flex-col items-center justify-center p-6 overflow-hidden"
       initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      exit={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
+      transition={{ duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }}
     >
-      {/* Main Container */}
-      <div className="text-center space-y-6 sm:space-y-8 max-w-2xl w-full">
-        
-        {/* Animated Background Orb */}
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 sm:w-96 sm:h-96 opacity-10"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          <div className="w-full h-full bg-gradient-to-r from-cyan-400/30 via-blue-500/30 to-purple-600/30 rounded-full blur-xl" />
-        </motion.div>
+      {/* Background Scanning Grid */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_50%,#333,transparent)]" />
+      </div>
 
-        {/* Glowing Logo Text */}
-        <div className="relative">
-          <motion.h1
-            initial={{ 
-              opacity: 0, 
-              scale: 0.8, 
-              filter: "blur(8px)" 
-            }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1, 
-              filter: "blur(0px)" 
-            }}
-            transition={{ 
-              duration: 1.5, 
-              ease: [0.25, 0.46, 0.45, 0.94] 
-            }}
-            className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight"
-          >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-700 dark:from-cyan-400 dark:via-blue-500 dark:to-purple-600">
-              Ankit
-            </span>
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 dark:from-purple-500 dark:via-blue-400 dark:to-cyan-400">
-              Kumar
-            </span>
-          </motion.h1>
-
-          {/* Subtle Glow Effect */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="absolute inset-0 -z-10 bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-600/20 blur-2xl rounded-full scale-110"
-          />
+      <div className="relative w-full max-w-2xl space-y-12">
+        {/* Top Header */}
+        <div className="flex justify-between items-end border-b-2 border-[#1A1A1A] pb-4">
+          <div className="space-y-1">
+            <motion.div
+              className="text-[#FF5F1F] font-mono text-xs tracking-widest"
+              animate={{ opacity: [1, 0.4, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              [ SYSTEM_ACTIVE ]
+            </motion.div>
+            <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tighter">
+              ANKIT_KUMAR
+            </h1>
+          </div>
+          <div className="text-right font-mono text-xs text-[#888888] space-y-1">
+            <div>LC_001.PROTO</div>
+            <div className="text-[#FF5F1F]">v.2025.A</div>
+          </div>
         </div>
 
-        {/* Subtitle with Typing Effect */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            delay: 0.8, 
-            duration: 1,
-            ease: "easeOut"
-          }}
-          className="space-y-4"
-        >
-          <motion.p
-            className="text-sm xs:text-base sm:text-lg font-medium text-slate-600 dark:text-slate-300 tracking-wide uppercase"
-            animate={{
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            Initializing Portfolio System
-          </motion.p>
-
-          {/* Dots Animation */}
-          <motion.div className="flex justify-center space-x-1">
-            {[0, 1, 2].map((dot) => (
-              <motion.span
-                key={dot}
-                className="w-1 h-1 xs:w-1.5 xs:h-1.5 bg-cyan-500 rounded-full"
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  delay: dot * 0.2,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Enhanced Loading Bar */}
-        <motion.div
-          className="relative w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-        >
-          {/* Background Track */}
-          <div className="w-full h-2 sm:h-2.5 bg-slate-200/80 dark:bg-slate-700/50 rounded-full overflow-hidden backdrop-blur-sm">
-            {/* Animated Fill */}
-            <motion.div
-              className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 relative"
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                repeatType: "reverse"
-              }}
+        {/* Status Terminal */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="h-4 w-1 bg-[#FF5F1F] animate-pulse" />
+            <motion.div 
+              key={status}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="font-mono text-sm text-[#E5E5E5] tracking-widest"
             >
-              {/* Shimmer Effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                animate={{ x: [-100, 100] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
+              {status}
             </motion.div>
           </div>
-          
-          {/* Glow Effect */}
-          <motion.div
-            className="absolute inset-0 -z-10 bg-cyan-400/20 blur-lg"
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </motion.div>
 
-        {/* Progress Percentage */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="text-xs sm:text-sm font-mono text-slate-500 dark:text-slate-400"
-        >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.8 }}
-          >
-            Loading...
-          </motion.span>
-        </motion.div>
+          {/* Progress Bar Container */}
+          <div className="relative h-12 w-full bg-[#1A1A1A] border-2 border-[#222] p-1 overflow-hidden group">
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#fff_10px,#fff_20px)]" />
+            
+            {/* Progress Fill */}
+            <motion.div
+              className="h-full bg-[#FF5F1F] relative flex items-center justify-end px-4"
+              initial={{ width: "0%" }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.1 }}
+            >
+              {/* Scanline Effect */}
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.2)_50%,transparent_100%)] w-1/2 animate-[shimmer_2s_infinite]" />
+              
+              {progress > 10 && (
+                <span className="font-mono text-black font-black text-sm z-10">
+                  {progress}%
+                </span>
+              )}
+            </motion.div>
+          </div>
+        </div>
 
-        {/* Enhanced Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="pt-6 sm:pt-8 border-t border-slate-200/50 dark:border-slate-700/50"
-        >
-          <p className="text-xs xs:text-sm text-slate-500 dark:text-slate-400 tracking-wide font-light">
-            © 2025 Ankit Kumar • Crafted with React ⚡ & Tailwind CSS
-          </p>
-        </motion.div>
+        {/* Footer Info */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-12 border-t border-[#1A1A1A]">
+          {[
+            { label: "MEMORY", value: "STABLE" },
+            { label: "CPU", value: "98.2%" },
+            { label: "LINK", value: "ENCRYPTED" },
+            { label: "STATUS", value: "0x00A1" }
+          ].map((item, idx) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + idx * 0.1 }}
+              className="space-y-1"
+            >
+              <div className="text-[10px] text-[#555] font-mono tracking-widest">{item.label}</div>
+              <div className="text-xs text-[#E5E5E5] font-mono font-bold">{item.value}</div>
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+      {/* Static Noise Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100" />
     </motion.div>
   );
 };

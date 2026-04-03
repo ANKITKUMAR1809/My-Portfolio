@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -8,372 +8,176 @@ import {
   Award,
   Users,
   Code,
+  Terminal
 } from "lucide-react";
 
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState("professional");
-
-  const experienceData = {
-    professional: [
-      {
-        id: 1,
-        title: "Full Stack Developer",
-        company: "3KAryan Infotech",
-        type: "Full-time",
-        duration: "June 2025 – August 2025",
-        location: "Patna, India",
-        description:
-          "Developed responsive, SEO-optimized websites and delivered high-quality client projects using the MERN stack.",
-        achievements: [
-          "Delivered complete websites including 3karyaninfotech.co.in and sanikabag.com",
-          "Achieved 90%+ client satisfaction for design quality and timely delivery",
-          "Reduced page load speed by up to 50% through optimization",
-          "Implemented best practices in React, Tailwind, Node.js, Express, and MongoDB",
-          "Ensured scalable architecture and smooth production deployment",
-        ],
-        technologies: [
-          "React",
-          "Node.js",
-          "Express",
-          "MongoDB",
-          "Tailwind CSS",
-          "Framer Motion",
-        ],
-        icon: "🚀",
-        color: "from-purple-500 to-pink-500",
-      },
-
-      {
-        id: 2,
-        title: "React Developer Intern",
-        company: "Next24Tech",
-        type: "Internship",
-        duration: "May 2024 – July 2024",
-        location: "Remote",
-        description:
-          "Built and optimized responsive React applications, ensuring fast performance and clean UI.",
-        achievements: [
-          "Achieved 90% performance ratings for website development",
-          "Improved loading speed by 100% through UI and code optimization",
-          "Developed reusable React components for scalable applications",
-        ],
-        technologies: ["React", "JavaScript", "Tailwind CSS"],
-        icon: "💻",
-        color: "from-blue-500 to-cyan-500",
-      },
-
-      {
-        id: 3,
-        title: "MERN Stack Developer Intern",
-        company: "John Raicker",
-        type: "Internship",
-        duration: "April 2024 – June 2024",
-        location: "Remote",
-        description:
-          "Worked on real-time MERN applications, improving backend authentication and overall performance.",
-        achievements: [
-          "Earned 95% ratings for MERN development quality",
-          "Improved backend authentication performance by 100%",
-          "Built real-time application features increasing client satisfaction",
-        ],
-        technologies: ["MongoDB", "Express", "React", "Node.js"],
-        icon: "🧩",
-        color: "from-green-500 to-emerald-500",
-      },
-
-      {
-        id: 4,
-        title: "Web Development Intern",
-        company: "BoostStar Experts",
-        type: "Internship",
-        duration: "Feb 2024 – April 2024",
-        location: "Remote",
-        description:
-          "Developed MERN-based client projects and resolved real-time development issues.",
-        achievements: [
-          "Received 95% ratings for client project delivery",
-          "Handled end-to-end development for MERN projects",
-          "Resolved real-time web development and performance issues",
-        ],
-        technologies: ["React", "Node.js", "Express", "MongoDB"],
-        icon: "🎓",
-        color: "from-teal-500 to-blue-500",
-      },
-    ],
-  };
-
-  const stats = [
+  const experienceData = [
     {
-      icon: Briefcase,
-      value: "1+",
-      label: "Years Experience",
-      color: "from-purple-500 to-pink-500",
+      id: 1,
+      title: "Full Stack Developer",
+      company: "3KAryan Infotech",
+      duration: "June 2025 – August 2025",
+      location: "Patna, India",
+      description: "Developed responsive, SEO-optimized websites and delivered high-quality client projects using the MERN stack.",
+      achievements: [
+        "Delivered complete websites including 3karyaninfotech.co.in and sanikabag.com",
+        "Achieved 90%+ client satisfaction for design quality and timely delivery",
+        "Reduced page load speed by up to 50% through optimization",
+      ],
+      technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+      status: "COMPLETED"
     },
     {
-      icon: Code,
-      value: "10+",
-      label: "Projects Completed",
-      color: "from-blue-500 to-cyan-500",
+      id: 2,
+      title: "React Developer Intern",
+      company: "Next24Tech",
+      duration: "May 2024 – July 2024",
+      location: "Remote",
+      description: "Built and optimized responsive React applications, ensuring fast performance and clean UI.",
+      achievements: [
+        "Achieved 90% performance ratings for website development",
+        "Improved loading speed by 100% through UI and code optimization",
+      ],
+      technologies: ["React", "JavaScript", "Tailwind CSS"],
+      status: "ARCHIVED"
     },
     {
-      icon: Users,
-      value: "10+",
-      label: "Happy Clients",
-      color: "from-green-500 to-emerald-500",
-    },
+      id: 3,
+      title: "MERN Stack Developer Intern",
+      company: "John Raicker",
+      duration: "April 2024 – June 2024",
+      location: "Remote",
+      description: "Worked on real-time MERN applications, improving backend authentication and overall performance.",
+      achievements: [
+        "Earned 95% ratings for MERN development quality",
+        "Improved backend authentication performance by 100%",
+      ],
+      technologies: ["MongoDB", "Express", "React", "Node.js"],
+      status: "ARCHIVED"
+    }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 12 },
-    },
-  };
-
   return (
-    <section
-      id="experience"
-      className="min-h-screen bg-gradient-to-br from-white via-purple-50/20 to-pink-50/10 w-full flex items-center justify-center py-20 px-4 md:px-8"
-    >
-      <div className="max-w-7xl w-full">
+    <section id="experience" className="py-32 bg-[#0B0B0B] relative overflow-hidden border-b-2 border-[#1A1A1A]">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
+      
+      <div className="max-w-[1400px] mx-auto px-6">
         {/* Header */}
-        <motion.div
-          className="text-center mb-16 md:mb-20"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 md:mb-6">
-            My Journey
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From passionate beginner to professional developer - documenting my
-            growth through code and innovation
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 sm:mb-20 border-l-4 border-[#FF5F1F] pl-6 sm:pl-8">
+          <div>
+            <div className="font-mono text-[10px] text-[#FF5F1F] tracking-[0.3em] mb-3 sm:mb-4 uppercase">[ MISSION_HISTORY ]</div>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter uppercase text-white leading-none">
+              EXP_LOG
+            </h2>
+          </div>
+          <p className="max-w-md text-[#888888] font-mono text-xs sm:text-sm uppercase tracking-tight">
+            Sequential deployment history of full-stack modules and industrial-grade software engineering.
           </p>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16"
-          initial="hidden"
-          whileInView="visible"
-          variants={containerVariants}
-          viewport={{ once: true }}
-        >
-          {stats.map((stat) => (
-            <motion.div
-              key={stat.label}
-              variants={itemVariants}
-              className="bg-white/80 backdrop-blur-lg rounded-3xl p-6 text-center border border-white/30 shadow-xl hover:shadow-2xl transition-all duration-300 group"
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <div
-                className={`w-16 h-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
-              >
-                <stat.icon size={28} className="text-white" />
-              </div>
-
-              <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-purple-600 bg-clip-text text-transparent mb-2">
-                {stat.value}
-              </div>
-              <div className="text-gray-600 font-medium">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
+        </div>
 
         {/* Experience Timeline */}
-        <motion.div
-          className="relative"
-          initial="hidden"
-          whileInView="visible"
-          variants={containerVariants}
-          viewport={{ once: true }}
-        >
-          {/* Center Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-200 to-pink-200 rounded-full hidden lg:block"></div>
+        <div className="space-y-8 sm:space-y-12">
+          {experienceData.map((exp, index) => (
+            <motion.div
+              key={exp.id}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="group relative flex flex-col lg:grid lg:grid-cols-[0.3fr_1fr] border-2 border-[#1A1A1A] hover:border-[#FF5F1F] transition-colors bg-[#0D0D0D]"
+            >
+              {/* Sidebar Info */}
+              <div className="p-6 sm:p-8 border-b-2 lg:border-b-0 lg:border-r-2 border-[#1A1A1A] group-hover:border-[#FF5F1F] transition-colors bg-[#0B0B0B]">
+                <div className="font-mono text-[10px] text-[#555] mb-4 sm:mb-6 tracking-widest uppercase">ID_00{exp.id}</div>
+                <div className="text-[#FF5F1F] font-black text-lg sm:text-xl mb-1 sm:mb-2 uppercase tracking-tighter">{exp.status}</div>
+                <div className="text-[10px] sm:text-xs text-[#888888] font-mono mb-6 sm:mb-8">{exp.duration}</div>
+                <div className="flex items-center gap-2 text-[#E5E5E5] font-mono text-[10px] tracking-widest uppercase opacity-60">
+                  <MapPin size={12} className="text-[#FF5F1F]" /> {exp.location}
+                </div>
+              </div>
 
-          <div className="space-y-12">
-            {experienceData.professional.map((experience, index) => (
-              <motion.div
-                key={experience.id}
-                variants={itemVariants}
-                className={`relative flex flex-col lg:flex-row items-center gap-8 ${
-                  index % 2 === 0 ? "lg:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full border-4 border-white shadow-xl z-10 hidden lg:block"></div>
-
-                {/* Card */}
-                <motion.div
-                  className={`bg-white/80 backdrop-blur-lg rounded-3xl p-6 md:p-8 shadow-2xl border border-white/30 hover:shadow-3xl transition-all duration-300 w-full lg:w-5/6 ${
-                    index % 2 === 0
-                      ? "lg:mr-auto lg:ml-8"
-                      : "lg:ml-auto lg:mr-8"
-                  }`}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                >
-                  <div className="flex flex-col lg:flex-row gap-6">
-                    {/* Icon */}
-                    <div className="flex-shrink-0">
-                      <div
-                        className={`w-20 h-20 bg-gradient-to-r ${experience.color} rounded-2xl flex items-center justify-center text-2xl shadow-lg`}
-                      >
-                        {experience.icon}
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 space-y-4">
-                      {/* Title */}
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                        <div>
-                          <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-purple-600 bg-clip-text text-transparent">
-                            {experience.title}
-                          </h3>
-
-                          <div className="flex items-center gap-2 mt-2">
-                            <span className="text-lg font-semibold text-gray-800">
-                              {experience.company}
-                            </span>
-
-                            <span className="px-3 py-1 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-full text-sm font-medium border border-purple-100">
-                              {experience.type}
-                            </span>
-                          </div>
-                        </div>
-
-                        <a
-                          href="#"
-                          className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 hover:shadow-lg transition-all duration-300 group self-start"
-                        >
-                          <ExternalLink size={16} />
-                          View
-                        </a>
-                      </div>
-
-                      {/* Details */}
-                      <div className="flex flex-wrap gap-4 text-gray-600">
-                        <div className="flex items-center gap-2">
-                          <Calendar size={18} />
-                          <span className="text-sm md:text-base">
-                            {experience.duration}
-                          </span>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <MapPin size={18} />
-                          <span className="text-sm md:text-base">
-                            {experience.location}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-gray-600 leading-relaxed">
-                        {experience.description}
-                      </p>
-
-                      {/* Achievements */}
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                          <Award size={20} className="text-purple-600" />
-                          Key Achievements
-                        </h4>
-
-                        <ul className="space-y-2">
-                          {experience.achievements.map((achievement, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start gap-3 text-gray-600"
-                            >
-                              <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mt-2 flex-shrink-0"></div>
-                              <span>{achievement}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Technologies */}
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-800 mb-3">
-                          Technologies Used
-                        </h4>
-
-                        <div className="flex flex-wrap gap-2">
-                          {experience.technologies.map((tech, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-1 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-full text-sm font-medium border border-purple-100 shadow-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+              {/* Main Content */}
+              <div className="p-6 sm:p-8 md:p-12 space-y-6 sm:space-y-8">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-6">
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase mb-1 sm:mb-2 group-hover:text-[#FF5F1F] transition-colors">
+                      {exp.title}
+                    </h3>
+                    <div className="font-mono text-base sm:text-lg text-[#888888] uppercase tracking-tighter">
+                      // {exp.company}
                     </div>
                   </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                  <button className="w-full sm:w-auto p-3 sm:p-4 border-2 border-[#1A1A1A] group-hover:border-[#FF5F1F] text-[#FF5F1F] hover:bg-[#FF5F1F] hover:text-black transition-all font-mono text-[10px] tracking-widest uppercase">
+                    DOC_DETAILS
+                  </button>
+                </div>
 
-        {/* CTA */}
+                <p className="text-[#E5E5E5] text-base sm:text-lg font-light leading-relaxed max-w-4xl opacity-80">
+                  {exp.description}
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-8 sm:gap-12">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex items-center gap-2 font-mono text-[10px] text-[#FF5F1F] tracking-widest uppercase">
+                      <Award size={14} /> KEY_OBJECTIVES
+                    </div>
+                    <ul className="space-y-2 sm:space-y-3">
+                      {exp.achievements.map((ach, i) => (
+                        <li key={i} className="flex gap-3 sm:gap-4 text-[10px] sm:text-sm text-[#888888] font-mono leading-tight">
+                          <span className="text-[#FF5F1F]">0{i+1}</span>
+                          {ach}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex items-center gap-2 font-mono text-[10px] text-[#FF5F1F] tracking-widest uppercase">
+                      <Terminal size={14} /> TECH_STACK
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech, i) => (
+                        <span key={i} className="px-2 sm:px-3 py-1 border border-[#1A1A1A] group-hover:border-[#FF5F1F]/30 text-[9px] sm:text-[10px] font-mono text-[#555] group-hover:text-[#E5E5E5] transition-colors uppercase">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Corner */}
+              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#FF5F1F] opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA - Monolith Style */}
         <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
+          className="mt-32 p-12 border-4 border-[#FF5F1F] bg-[#0D0D0D] relative group overflow-hidden"
         >
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-              Ready to Work Together?
-            </h3>
-
-            <p className="text-purple-100 mb-6 max-w-2xl mx-auto text-lg">
-              Let's bring your next project to life with professional expertise
-              and innovative solutions.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-3 bg-white text-purple-600 px-8 py-4 rounded-2xl font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                <Briefcase size={20} />
-                Start a Project
-              </a>
-
-              <a
-                href="#projects"
-                className="inline-flex items-center gap-3 bg-transparent border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/10 hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                <Code size={20} />
-                View My Work
-              </a>
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+            <div className="max-w-2xl">
+              <h3 className="text-4xl md:text-5xl font-black tracking-tighter text-white uppercase mb-4">
+                INITIATE_COLLABORATION
+              </h3>
+              <p className="font-mono text-[#888888] text-sm tracking-tight uppercase">
+                Systems stable. Connectivity protocols active. Ready for high-impact software deployment.
+              </p>
             </div>
+            <a
+              href="#contact"
+              className="px-12 py-6 bg-[#FF5F1F] text-black font-black uppercase tracking-[0.2em] text-sm hover:scale-105 transition-transform"
+            >
+              TRANSMIT_REQUEST
+            </a>
           </div>
+          {/* Background Texture for CTA */}
+          <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,#FF5F1F_20px,#FF5F1F_40px)]" />
         </motion.div>
-
-        {/* Decorative Background */}
-        <div className="absolute top-40 left-10 w-32 h-32 bg-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 right-10 w-40 h-40 bg-pink-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-200/15 rounded-full blur-2xl"></div>
       </div>
     </section>
   );
