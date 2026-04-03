@@ -54,7 +54,7 @@ const Home = () => {
             </div>
             <div>
               <h1 className="text-xl font-black tracking-tighter text-white">ANKIT_KUMAR</h1>
-              <div className="text-[10px] font-mono text-[#FF5F1F] tracking-widest animate-pulse">[ SYSTEM_OPERATOR ]</div>
+              <div className="text-[10px] font-mono text-[#FF5F1F] tracking-widest animate-pulse">[ WEB_DEVELOPER ]</div>
             </div>
           </div>
 
